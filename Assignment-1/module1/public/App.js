@@ -4,7 +4,7 @@ var nameComponent = React.createElement("div", {
   id: "out"
 }, React.createElement("h2", {
   id: "name_comp"
-}, "Gopi Kenjale"));
+}, "Ashish Kenjale"));
 var pictureComponent = React.createElement("div", {
   id: "picture_out"
 }, React.createElement("img", {
