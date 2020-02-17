@@ -7,8 +7,9 @@ class ProductFilter extends React.Component {
 
 function ProductRow(props) {
   const product = props.product;
-  return React.createElement("tr", null, React.createElement("td", null, product.id), React.createElement("td", null, product.productName), React.createElement("td", null, "$", product.pricePerUnit), React.createElement("td", null, product.category), React.createElement("td", null, React.createElement("a", {
-    href: product.imageUrl
+  return React.createElement("tr", null, React.createElement("td", null, product.productName), React.createElement("td", null, "$", product.pricePerUnit), React.createElement("td", null, product.category), React.createElement("td", null, React.createElement("a", {
+    href: product.imageUrl,
+    target: "_blank"
   }, "View")));
 }
 
@@ -19,7 +20,7 @@ function ProductTable(props) {
   }));
   return React.createElement("table", {
     className: "bordered-table"
-  }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "ID"), React.createElement("th", null, "Product Name"), React.createElement("th", null, "Price"), React.createElement("th", null, "Category"), React.createElement("th", null, "Image"))), React.createElement("tbody", null, productRows));
+  }, React.createElement("thead", null, React.createElement("tr", null, React.createElement("th", null, "Product Name"), React.createElement("th", null, "Price"), React.createElement("th", null, "Category"), React.createElement("th", null, "Image"))), React.createElement("tbody", null, productRows));
 }
 
 class ProductAdd extends React.Component {
@@ -48,24 +49,32 @@ class ProductAdd extends React.Component {
     return React.createElement("form", {
       name: "productAdd",
       onSubmit: this.handleSubmit
-    }, React.createElement("input", {
-      type: "text",
-      name: "productName",
-      placeholder: "Product Name"
-    }), React.createElement("input", {
+    }, React.createElement("table", {
+      className: "unbordered-table"
+    }, React.createElement("tr", null, React.createElement("td", null, React.createElement("div", null, "Category", React.createElement("br", null), React.createElement("select", {
+      id: "categoryMenu",
+      name: "category"
+    }, React.createElement("option", {
+      value: "Shirts"
+    }, "Shirts"), React.createElement("option", {
+      value: "Jeans"
+    }, "Jeans"), React.createElement("option", {
+      value: "Jackets"
+    }, "Jackets"), React.createElement("option", {
+      value: "Sweaters"
+    }, "Sweaters"), React.createElement("option", {
+      value: "Accessories"
+    }, "Accessories")))), React.createElement("br", null), React.createElement("td", null, React.createElement("div", null, "Price Per Unit", React.createElement("br", null), React.createElement("input", {
       type: "text",
       name: "pricePerUnit",
-      placeholder: "Price (in $)",
       defaultValue: "$"
-    }), React.createElement("input", {
+    })))), React.createElement("br", null), React.createElement("tr", null, React.createElement("td", null, React.createElement("div", null, "Product Name", React.createElement("br", null), React.createElement("input", {
       type: "text",
-      name: "category",
-      placeholder: "Category"
-    }), React.createElement("input", {
+      name: "productName"
+    }))), React.createElement("br", null), React.createElement("td", null, React.createElement("div", null, "Image URL", React.createElement("br", null), React.createElement("input", {
       type: "text",
-      name: "imageUrl",
-      placeholder: "Image URL"
-    }), React.createElement("button", null, "Add"));
+      name: "imageUrl"
+    }))), React.createElement("br", null)), React.createElement("br", null), React.createElement("tr", null, React.createElement("td", null, React.createElement("button", null, "Add Product")))));
   }
 
 }
@@ -101,9 +110,9 @@ class ProductList extends React.Component {
   }
 
   render() {
-    return React.createElement(React.Fragment, null, React.createElement("h1", null, "Product Tracker"), React.createElement("h4", null, "Showing all available products"), React.createElement("hr", null), React.createElement(ProductTable, {
+    return React.createElement(React.Fragment, null, React.createElement("h1", null, "Inventory Management"), React.createElement("h4", null, "Showing all available products"), React.createElement("hr", null), React.createElement(ProductTable, {
       products: this.state.products
-    }), React.createElement("h4", null, "Add a new product to inventory"), React.createElement("hr", null), React.createElement(ProductAdd, {
+    }), React.createElement("br", null), React.createElement("h4", null, "Add a new product to inventory"), React.createElement("hr", null), React.createElement(ProductAdd, {
       createProduct: this.createProduct
     }));
   }
