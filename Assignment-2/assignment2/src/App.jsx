@@ -68,16 +68,16 @@ class ProductAdd extends React.Component {
             <form name="productAdd" onSubmit={this.handleSubmit}>
                 <table className="unbordered-table">
                     <tr>
-                        <td> 
+                        <td>
                             <div>Category
                                 <br />
                                 <select id="categoryMenu" name="category">
-									<option value = "Shirts">Shirts</option>
-									<option value = "Jeans">Jeans</option>
-									<option value = "Jackets">Jackets</option>
-									<option value = "Sweaters">Sweaters</option>
-									<option value = "Accessories">Accessories</option>
-							    </select>
+                                    <option value="Shirts">Shirts</option>
+                                    <option value="Jeans">Jeans</option>
+                                    <option value="Jackets">Jackets</option>
+                                    <option value="Sweaters">Sweaters</option>
+                                    <option value="Accessories">Accessories</option>
+                                </select>
                             </div>
                         </td>
 
@@ -103,13 +103,13 @@ class ProductAdd extends React.Component {
                         </td>
                         <br />
                     </tr>
-                
-                <br/>
-                <tr>
-                    <td>
-                <button>Add Product</button>
-                </td>
-                </tr>
+
+                    <br />
+                    <tr>
+                        <td>
+                            <button>Add Product</button>
+                        </td>
+                    </tr>
                 </table>
             </form>
         );
@@ -143,7 +143,7 @@ class ProductList extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Inventory Management</h1>
+                <h1>My Company Inventory</h1>
                 <h4>Showing all available products</h4>
                 <hr />
                 <ProductTable products={this.state.products} />
