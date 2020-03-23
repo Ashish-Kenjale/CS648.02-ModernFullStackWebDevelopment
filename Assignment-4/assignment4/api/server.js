@@ -46,16 +46,14 @@ function addProduct(_, { product }) {
 }
 
 const server = new ApolloServer({
-    typeDefs: fs.readFileSync('./server/schema.graphql', 'utf-8'),
+    typeDefs: fs.readFileSync('schema.graphql', 'utf-8'),
     resolvers,
 });
 
 const app = express();
 
-app.use(express.static('public'));
-
 server.applyMiddleware({ app, path: '/graphql' });
 
 app.listen(3000, function () {
-    console.log('App started on port 3000');
+    console.log('API Server started on port 3000');
 });
