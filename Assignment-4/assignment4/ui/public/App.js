@@ -7,7 +7,7 @@ class ProductFilter extends React.Component {
 
 function ProductRow(props) {
   const product = props.product;
-  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, product.productName), /*#__PURE__*/React.createElement("td", null, "$", product.pricePerUnit), /*#__PURE__*/React.createElement("td", null, product.category), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("a", {
+  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, product.id), /*#__PURE__*/React.createElement("td", null, product.productName), /*#__PURE__*/React.createElement("td", null, "$", product.pricePerUnit), /*#__PURE__*/React.createElement("td", null, product.category), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("a", {
     href: product.imageUrl,
     target: "_blank"
   }, "View")));
@@ -20,7 +20,7 @@ function ProductTable(props) {
   }));
   return /*#__PURE__*/React.createElement("table", {
     className: "bordered-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Product Name"), /*#__PURE__*/React.createElement("th", null, "Price"), /*#__PURE__*/React.createElement("th", null, "Category"), /*#__PURE__*/React.createElement("th", null, "Image"))), /*#__PURE__*/React.createElement("tbody", null, productRows));
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "ID"), /*#__PURE__*/React.createElement("th", null, "Product Name"), /*#__PURE__*/React.createElement("th", null, "Price"), /*#__PURE__*/React.createElement("th", null, "Category"), /*#__PURE__*/React.createElement("th", null, "Image"))), /*#__PURE__*/React.createElement("tbody", null, productRows));
 }
 
 class ProductAdd extends React.Component {
@@ -51,7 +51,7 @@ class ProductAdd extends React.Component {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/React.createElement("table", {
       className: "unbordered-table"
-    }, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Category", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("select", {
+    }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Category", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("select", {
       id: "categoryMenu",
       name: "category"
     }, /*#__PURE__*/React.createElement("option", {
@@ -64,17 +64,17 @@ class ProductAdd extends React.Component {
       value: "Sweaters"
     }, "Sweaters"), /*#__PURE__*/React.createElement("option", {
       value: "Accessories"
-    }, "Accessories")))), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Price Per Unit", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    }, "Accessories")))), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Price Per Unit", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
       type: "text",
       name: "pricePerUnit",
       defaultValue: "$"
-    })))), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Product Name", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    }))))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Product Name", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
       type: "text",
       name: "productName"
-    }))), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Image URL", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    }))), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("div", null, "Image URL", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
       type: "text",
       name: "imageUrl"
-    }))), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("button", null, "Add Product")))));
+    }))))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("button", null, "Add Product"))))));
   }
 
 }
@@ -102,7 +102,7 @@ class ProductList extends React.Component {
               imageUrl
             }
           }`;
-    const response = await fetch('http://localhost:3000/graphql', {
+    const response = await fetch(window.ENV.UI_API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ class ProductList extends React.Component {
                 id
             }
           }`;
-    const response = await fetch('http://localhost:3000/graphql', {
+    const response = await fetch(window.ENV.UI_API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
