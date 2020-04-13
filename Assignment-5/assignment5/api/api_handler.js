@@ -1,13 +1,14 @@
 const fs = require('fs');
 require('dotenv').config();
 const { ApolloServer } = require('apollo-server-express');
+const product = require('./product');
 
 const resolvers = {
   Query: {
-    productList,
+    productList: product.list,
   },
   Mutation: {
-    addProduct,
+    addProduct: product.add,
   },
 };
 

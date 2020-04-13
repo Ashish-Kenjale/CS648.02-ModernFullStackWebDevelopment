@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import ProductList from './ProductList.jsx';
 
-const element = (<ProductList />);
+const element = <ProductList />;
 
 ReactDOM.render(element, document.getElementById('contents'));
 
