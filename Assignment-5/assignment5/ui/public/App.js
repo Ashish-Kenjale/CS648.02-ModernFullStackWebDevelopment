@@ -1,3 +1,10 @@
+/* eslint "react/react-in-jsx-scope": "off" */
+
+/* globals React ReactDOM */
+
+/* eslint "react/jsx-no-undef": "off" */
+
+/* eslint-disable react/prefer-stateless-function */
 class ProductFilter extends React.Component {
   render() {
     return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for the product filter.");
@@ -6,7 +13,9 @@ class ProductFilter extends React.Component {
 }
 
 function ProductRow(props) {
-  const product = props.product;
+  const {
+    product
+  } = props;
   return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, product.id), /*#__PURE__*/React.createElement("td", null, product.productName), /*#__PURE__*/React.createElement("td", null, "$", product.pricePerUnit), /*#__PURE__*/React.createElement("td", null, product.category), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("a", {
     href: product.imageUrl,
     target: "_blank"
@@ -39,10 +48,10 @@ class ProductAdd extends React.Component {
       imageUrl: form.imageUrl.value
     };
     this.props.createProduct(product);
-    form.productName.value = "";
-    form.pricePerUnit.value = "$";
-    form.category.value = "Shirts";
-    form.imageUrl.value = "";
+    form.productName.value = '';
+    form.pricePerUnit.value = '$';
+    form.category.value = 'Shirts';
+    form.imageUrl.value = '';
   }
 
   render() {
