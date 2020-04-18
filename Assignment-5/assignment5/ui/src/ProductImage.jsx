@@ -1,16 +1,14 @@
 import React from 'react';
 
 export default function ProductImage({ match }) {
-  const { imageUrl } = match.params;
-  { console.log(imageUrl);
-    console.log('imageUrl'); } 
+  const { url } = match.params;
+  { console.log(decodeURIComponent(url)); }
+
   return (
     <div>
       <br />
       <br />
-      <img src={require(`${imageUrl}`)} alt="Not found" />
-
-      {/* <img src={imageUrl} alt="Not found" /> */}
+      <img src={decodeURIComponent(url)} alt="" />
     </div>
   );
 }

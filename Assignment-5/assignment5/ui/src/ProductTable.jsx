@@ -10,10 +10,10 @@ const ProductRow = withRouter(({ product, deleteProduct, index }) => (
       {product.pricePerUnit}
     </td>
     <td>{product.category}</td>
-    <td><Link to={`/image/${product.imageUrl}`}>View</Link></td>
+    {/* { url: encodeURIComponent(${product.imageUrl}) }encodeURIComponent */}
+    <td><Link to={`/image/${encodeURIComponent(product.imageUrl)}`}>View</Link></td>
     <td><Link to={`/edit/${product.id}`}>Edit</Link></td>
     <td><button type="button" onClick={() => { deleteProduct(index); }}>Delete</button></td>
-    <td>{product.imageUrl}</td>
   </tr>
 ));
 
@@ -38,7 +38,6 @@ export default function ProductTable({ products, deleteProduct }) {
           <th>Image</th>
           <th>Edit</th>
           <th>Delete</th>
-          <th>Image URL</th>
         </tr>
       </thead>
       <tbody>
