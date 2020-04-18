@@ -7,6 +7,12 @@ async function list() {
   return products;
 }
 
+async function getProduct(_, { id }) {
+  const db = getDb();
+  const product = await db.collection('products').findOne({ id });
+  return product;
+}
+
 function validate(product) {
   const errors = [];
   if (product.productName.length < 3) {
@@ -29,4 +35,30 @@ async function add(_, { product }) {
   return savedProduct;
 }
 
-module.exports = { list, add };
+async function update(_, { id, changes }) {
+  const db = getDb();
+  await db.collection('products').updateOne({ id }, { $set: changes });
+  const savedProduct = await db.collection('products').findOne({ id });
+  return savedProduct;
+}
+
+async function remove(_, { id }) {
+  const db = getDb();
+  const product = await db.collection('products').findOne({ id });
+  if (!product) return false;
+  product.deleted = new Date();
+  let result = await db.collection('deleted_products').insertOne(product);
+  if (result.insertedId) {
+    result = await db.collection('products').removeOne({ id });
+    return result.deletedCount === 1;
+  }
+  return false;
+}
+
+module.exports = {
+  list,
+  add,
+  getProduct,
+  update,
+  remove,
+};
