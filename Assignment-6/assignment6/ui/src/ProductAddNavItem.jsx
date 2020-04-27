@@ -42,6 +42,25 @@ class ProductAddNavItem extends React.Component {
     this.setState({ toastVisible: false });
   }
 
+  async loadData() {
+    const query = `query {
+            productList {
+              id
+              productName
+              pricePerUnit
+              category
+              imageUrl
+            }
+          }`;
+
+    const data = await graphQLFetch(query);
+
+    if (data) {
+      const { history } = this.props;
+      history.push('/');
+    }
+  }
+
   async createProduct(product) {
     const query = `mutation addProduct($product: ProductInputs!) {
             addProduct(product: $product) {
@@ -49,7 +68,7 @@ class ProductAddNavItem extends React.Component {
             }
           }`;
 
-    const data = await graphQLFetch(query, { product });
+    const data = await graphQLFetch(query, { product },  this.showError);
     if (data) {
       this.loadData();
     }
@@ -61,11 +80,10 @@ class ProductAddNavItem extends React.Component {
     const form = document.forms.productAdd;
 
     const product = {
-      productName: form.productName.value, pricePerUnit: form.pricePerUnit.value.substr(1), category: form.category.value, imageUrl: form.imageUrl.value,
+      productName: form.productName.value, pricePerUnit: form.pricePerUnit.value, category: form.category.value, imageUrl: form.imageUrl.value,
     };
 
-    // const { createProduct } = this.props;
-    this.createProduct(product);
+    await this.createProduct(product);
 
     form.productName.value = '';
     form.pricePerUnit.value = '$';
@@ -94,12 +112,33 @@ class ProductAddNavItem extends React.Component {
           <Modal.Body>
             <Form name="productAdd">
               <FormGroup>
-                <ControlLabel>Title</ControlLabel>
-                <FormControl name="title" autoFocus />
+                <ControlLabel>Category:</ControlLabel>
+                <FormControl
+                  componentClass="select"
+                  name="category"
+                  autoFocus
+                >
+                  <option value="Shirts">Shirts</option>
+                  <option value="Jeans">Jeans</option>
+                  <option value="Jackets">Jackets</option>
+                  <option value="Sweaters">Sweaters</option>
+                  <option value="Accessories">Accessories</option>
+                </FormControl>
               </FormGroup>
+
               <FormGroup>
-                <ControlLabel>Owner</ControlLabel>
-                <FormControl name="owner" />
+                <ControlLabel>Product Name</ControlLabel>
+                <FormControl name="productName" />
+              </FormGroup>
+
+              <FormGroup>
+                <ControlLabel>Price Per Unit (in USD)</ControlLabel>
+                <FormControl name="pricePerUnit" type="number" />
+              </FormGroup>
+
+              <FormGroup>
+                <ControlLabel>Image URL</ControlLabel>
+                <FormControl name="imageUrl" />
               </FormGroup>
             </Form>
           </Modal.Body>

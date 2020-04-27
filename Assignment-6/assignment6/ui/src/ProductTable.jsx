@@ -27,7 +27,6 @@ const ProductRow = withRouter(({ product, deleteProduct, index }) => {
         $
         {product.pricePerUnit}
       </td>
-      {/* { url: encodeURIComponent(${product.imageUrl}) }encodeURIComponent */}
       <td><Link to={`/image/${encodeURIComponent(product.imageUrl)}`}>View</Link></td>
       <td>
 
@@ -39,28 +38,16 @@ const ProductRow = withRouter(({ product, deleteProduct, index }) => {
           </OverlayTrigger>
         </LinkContainer>
         {' '}
-        {/* <Link to={`/edit/${product.id}`}>Edit</Link> */}
-        {/* {' | '}
-        <NavLink to={selectLocation}>Select</NavLink> */}
-        {/* {' | '} */}
         <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
           <Button bsSize="xsmall" onClick={onDelete}>
             <Glyphicon glyph="trash" />
           </Button>
         </OverlayTrigger>
       </td>
-
-      {/* <td><Link to={`/edit/${product.id}`}>Edit</Link></td> */}
-      {/* <td><button type="button" onClick={() => { deleteProduct(index); }}>Delete</button></td> */}
     </tr>
   );
 
   return tableRow;
-  // return (
-  //   <LinkContainer to={selectLocation}>
-  //     { tableRow }
-  //   // </LinkContainer>
-  // );
 });
 
 export default function ProductTable({ products, deleteProduct }) {

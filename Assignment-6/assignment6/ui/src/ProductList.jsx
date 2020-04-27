@@ -2,14 +2,12 @@
 import React from 'react';
 
 import ProductTable from './ProductTable.jsx';
-import ProductAdd from './ProductAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
 
 export default class ProductList extends React.Component {
   constructor() {
     super();
     this.state = { products: [] };
-    this.createProduct = this.createProduct.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
   }
 
@@ -34,19 +32,6 @@ export default class ProductList extends React.Component {
     }
   }
 
-  // async createProduct(product) {
-  //   const query = `mutation addProduct($product: ProductInputs!) {
-  //           addProduct(product: $product) {
-  //               id
-  //           }
-  //         }`;
-
-  //   const data = await graphQLFetch(query, { product });
-  //   if (data) {
-  //     this.loadData();
-  //   }
-  // }
-
   async deleteProduct(id) {
     const query = `mutation deleteProduct($id: Int!) {
       deleteProduct(id: $id)
@@ -63,14 +48,10 @@ export default class ProductList extends React.Component {
     const { products } = this.state;
     return (
       <React.Fragment>
-        {/* <h1><Label>My Company Inventory</Label></h1> */}
         <h4>Showing all available products</h4>
         <hr />
         <ProductTable products={products} deleteProduct={this.deleteProduct} />
         <br />
-        {/* <h4>Add a new product to inventory</h4>
-        <hr />
-        <ProductAdd createProduct={this.createProduct} /> */}
       </React.Fragment>
     );
   }
