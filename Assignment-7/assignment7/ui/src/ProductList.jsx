@@ -7,7 +7,7 @@ import graphQLFetch from './graphQLFetch.js';
 export default class ProductList extends React.Component {
   constructor() {
     super();
-    this.state = { products: [] };
+    this.state = { products: [], prodCount: [] };
     this.deleteProduct = this.deleteProduct.bind(this);
   }
 
@@ -23,12 +23,15 @@ export default class ProductList extends React.Component {
               pricePerUnit
               category
               imageUrl
+            },
+            productCount {
+              count
             }
           }`;
 
     const data = await graphQLFetch(query);
     if (data) {
-      this.setState({ products: data.productList });
+      this.setState({ products: data.productList, prodCount: data.productCount[0].count });
     }
   }
 
@@ -46,9 +49,10 @@ export default class ProductList extends React.Component {
 
   render() {
     const { products } = this.state;
+    const { prodCount } = this.state;
     return (
       <React.Fragment>
-        <h4>Showing all available products</h4>
+        <h4>Showing {prodCount} available products</h4>
         <hr />
         <ProductTable products={products} deleteProduct={this.deleteProduct} />
         <br />

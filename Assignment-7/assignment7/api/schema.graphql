@@ -15,6 +15,10 @@ type Product {
     imageUrl: String
 }
 
+type ProductCount {
+    count: Int
+}
+
 input ProductInputs {
     category: categoryEnum!
     productName: String!
@@ -41,4 +45,5 @@ type Mutation {
 type Query {
     productList: [Product!]!
     product(id: Int!): Product!
+    productCount: [ProductCount!]!
 }

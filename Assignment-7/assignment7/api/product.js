@@ -1,6 +1,12 @@
 const { UserInputError } = require('apollo-server-express');
 const { getDb, getNextSequence } = require('./db.js');
 
+async function counts() {
+  const db = getDb();
+  const result = await db.collection('products').aggregate([{ $group: { _id: null, count: { $sum: 1 } } }]).toArray();
+  return result;
+}
+
 async function list() {
   const db = getDb();
   const products = await db.collection('products').find({}).toArray();
@@ -61,4 +67,5 @@ module.exports = {
   getProduct,
   update,
   remove,
+  counts,
 };
